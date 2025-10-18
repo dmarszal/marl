@@ -1,1 +1,238 @@
-hello
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARL | Park Handlowy Raciąż</title>
+    <meta name="description" content="Park handlowy w Raciążu to nowoczesny kompleks sklepów, gdzie znajdziesz wszystko czego potrzebujesz w jednym miejscu. Znajdują się tu sklepy Topaz, Rossmann i Pepco, oferujące bogaty wybór produktów w konkurencyjnych cenach. Oprócz tego, w parku handlowym znajdziesz paczkomat Inpost.
+Zapraszamy do skorzystania z wygodnych zakupów w przyjaznej atmosferze!">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="canonical" href="index.html">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#d7bf8e">
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Park Handlowy Raciąż">
+    <meta property="og:title" content="Park Handlowy Raciąż – Topaz, Rossmann, Pepco">
+    <meta property="og:description" content="Wygodne zakupy w jednym miejscu. Darmowy parking. Sprawdź dojazd i godziny.">
+    <meta property="og:image" content="assets/images/IMG_8711.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Park Handlowy Raciąż – Topaz, Rossmann, Pepco">
+    <meta name="twitter:description" content="Wygodne zakupy w jednym miejscu. Darmowy parking. Sprawdź dojazd i godziny.">
+    <meta name="twitter:image" content="assets/images/IMG_8711.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ShoppingCenter",
+      "@id": "index.html#shoppingCenter",
+      "name": "Park Handlowy Raciąż",
+      "image": "assets/images/IMG_8711.jpg",
+      "url": "index.html",
+      "telephone": "+48 123 456 789",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Zawoda 34",
+        "addressLocality": "Raciąż",
+        "addressCountry": "PL"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "22:00"
+        }
+      ],
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Bezpłatny parking", "value": true }
+      ]
+    }
+    </script>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/gem1.png" alt="MARL Logo" height="40"> </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Menu" aria-controls="primary-nav"><span class="bars"></span></button>
+            <ul class="nav-links" id="primary-nav">
+                <li><a href="index.html" class="active">Strona Główna</a></li>
+                <li><a href="sklepy.html">Sklepy</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+
+        <section class="hero" style="--hero-overlay: .55;">
+            <div class="hero-slides">
+                <div class="hero-slide" style="background-image: url('assets/images/IMG_8711.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('assets/images/IMG_8713-2.jpg');"></div>
+            </div>
+            <div class="hero-inner">
+                <h1>Park Handlowy Raciąż</h1>
+                <p>Topaz • Rossmann • Pepco — wygodne zakupy w jednym miejscu</p>
+                <div class="actions">
+                    <a href="#mapa" class="cta-button">Jak dojechać</a>
+                    <a href="#godziny" class="cta-button btn-secondary">Godziny otwarcia</a>
+                </div>
+            </div>
+            <div class="hero-wave" aria-hidden="true">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                    <path fill="var(--primary-color)" opacity="0.15" d="M0,80 C240,120 480,0 720,40 C960,80 1200,60 1440,20 L1440,120 L0,120 Z"></path>
+                    <path fill="var(--accent-color)" opacity="0.25" d="M0,70 C240,110 480,20 720,60 C960,100 1200,70 1440,30 L1440,120 L0,120 Z"></path>
+                    <path fill="#ffffff" d="M0,90 C240,130 480,40 720,80 C960,120 1200,80 1440,40 L1440,120 L0,120 Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section class="promo">
+            <div class="container">
+                <div class="message">Nowe godziny otwarcia: Pn–Sb 9:00–22:00 • Zapraszamy!</div>
+                <div class="actions">
+                    <a href="#mapa" class="cta-button">Pokaż mapę</a>
+                    <a href="contact.html" class="cta-button btn-secondary">Skontaktuj się</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tenants" id="sklepy">
+            <div class="container">
+                <h2>Nasi Najemcy</h2>
+                <div class="tenant-grid">
+                    <div class="tenant-item">
+                        <a class="tenant-card tenant-topaz" href="topaz.html">
+                            <img src="assets/images/topaz-logo.jpg" alt="Topaz" loading="lazy" decoding="async">
+                        </a>
+                        <div class="tenant-hours">Pn–Sb 7:00–22:00</div>
+                    </div>
+                    <div class="tenant-item">
+                        <a class="tenant-card tenant-rossmann" href="rossmann.html">
+                            <img src="assets/images/rossmann-logo.png" alt="Rossmann" loading="lazy" decoding="async">
+                        </a>
+                        <div class="tenant-hours">Poniedziałek–Sobota 9:00–20:00</div>
+                    </div>
+                    <div class="tenant-item">
+                        <a class="tenant-card tenant-pepco" href="pepco.html">
+                            <img src="assets/images/pepco-logo.png" alt="Pepco" loading="lazy" decoding="async">
+                        </a>
+                        <div class="tenant-hours">Poniedziałek–Piątek 9:00–19:30</div>
+                        <div class="tenant-hours">Sobota 9:00–18:00</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+            <div class="item">
+                <div class="tenant-hours">Niedziela (z wyjątkiem handlowych) Zamknięte</div>
+            </div>
+        <section class="tenants" id="uslugi">
+            <div class="container">
+                <h2>Usługi</h2>
+                <div class="tenant-grid">
+                    <div class="tenant-card" aria-label="InPost">
+                        <img src="assets/images/InPost_logo.png" alt="InPost" loading="lazy" decoding="async">
+                    </div>
+                    <div class="tenant-card" aria-label="Allegro One Box">
+                        <img src="assets/images/allegrobox-logo.png" alt="Allegro One Box" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-strip">
+            <div class="container">
+                <div class="info-item">
+                    <strong>Adres</strong>
+                    <span>Raciąż, ul. Zawoda 34</span>
+                </div>
+                <div class="info-item">
+                    <strong>Automaty paczkowe</strong>
+                    <span> Allegro, InPost</span>
+                </div>
+                <div class="info-item">
+                    <strong>Bezpłaty parking</strong>
+                    <span>100 miejsc parkingowych dla klientów</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section" id="mapa">
+            <div class="map-container">
+                <h2>Nasza Lokalizacja</h2>
+                <div class="google-map">
+                    <iframe title="Mapa: Raciąż, ul. Zawoda 34" src="https://www.google.com/maps?q=Raci%C4%85%C5%BC%2C%20ul.%20Zawoda%2034&output=embed&hl=pl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="map-actions">
+                        <a class="cta-button" href="https://www.google.com/maps/dir/?api=1&destination=Raci%C4%85%C5%BC%2C%20ul.%20Zawoda%2034&travelmode=driving" target="_blank" rel="noopener">Pokaż trasę</a>
+                    </div>
+                    <div class="hours-card" id="godziny" aria-labelledby="hours-title">
+                        <h3 id="hours-title">Godziny otwarcia</h3>
+                        <table class="hours-table" role="table">
+                            <tr>
+                                <td>Poniedziałek – Piątek</td>
+                                <td>9:00 – 22:00</td>
+                            </tr>
+                            <tr>
+                                <td>Sobota</td>
+                                <td>9:00 – 22:00</td>
+                            </tr>
+                            <tr>
+                                <td>Niedziela</td>
+                                <td>Zamknięte</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div>
+                <div class="footer-brand">
+                    <img src="assets/images/gem1.png" alt="Logo Park Handlowy Raciąż">
+                    <strong>Park Handlowy Raciąż</strong>
+                </div>
+                <p style="margin-top:.75rem; max-width: 420px;">Nowoczesny park handlowy w Raciążu. Wygodne zakupy blisko Ciebie: Topaz, Rossmann, Pepco i więcej.</p>
+            </div>
+            <div>
+                <h4>Nawigacja</h4>
+                <ul>
+                    <li><a href="index.html">Strona Główna</a></li>
+                    <li><a href="#mapa">Jak dojechać</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Dane kontaktowe</h4>
+                <ul>
+                    <li>Adres: Raciąż, ul. Zawoda 34</li>
+                    <li>Email: <a href="mailto:biuro@marl.pl">biuro@marl.pl</a></li>
+
+                </ul>
+            </div>
+            <div>
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MARL. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
