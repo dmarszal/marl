@@ -183,12 +183,12 @@ function initializePromoRotator() {
     if (!messageEl) return;
 
     const messages = [
-        'Nowe godziny otwarcia: Pn–Sb 9:00–22:00',
+        'Nowe godziny otwarcia: Poniedziałek–Sobota 7:00–22:00',
         'Zapraszamy do zakupów!',
         'Bezpłatny parking dla klientów ',
         'Wygodny dojazd',
         'Topaz • Rossmann • Pepco – wszystko w jednym miejscu',
-        'Odbiór paczek 24/7'
+        '24/7 odbiór paczek InPost i Allegro One Box'
     ];
 
     let idx = 0;
