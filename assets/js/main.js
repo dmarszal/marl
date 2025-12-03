@@ -183,7 +183,7 @@ function initializePromoRotator() {
     if (!messageEl) return;
 
     const messages = [
-        'Nowe godziny otwarcia: Poniedziałek–Sobota 7:00–22:00',
+        'Nowe godziny otwarcia: Poniedziałek–Sobota 7:00–21:00',
         'Zapraszamy do zakupów!',
         'Bezpłatny parking dla klientów ',
         'Wygodny dojazd',
