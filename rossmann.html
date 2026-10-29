@@ -17,25 +17,28 @@
   <meta property="og:site_name" content="Park Handlowy Raciąż" />
   <meta property="og:title" content="Rossmann – Park Handlowy Raciąż" />
   <meta property="og:description" content="Drogeria Rossmann w Parku Handlowym Raciąż. Godziny, opis, strona WWW." />
-  <meta property="og:image" content="assets/images/hero-bg.jpg" />
+  <meta property="og:image" content="https://marl.pl/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rossmann – Park Handlowy Raciąż" />
   <meta name="twitter:description" content="Drogeria Rossmann w Parku Handlowym Raciąż. Godziny, opis, strona WWW." />
-  <meta name="twitter:image" content="assets/images/hero-bg.jpg" />
+  <meta name="twitter:image" content="https://marl.pl/assets/images/og-image.jpg" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "DrugStore",
     "@id": "https://marl.pl/rossmann.html#store",
     "name": "Rossmann",
-    "image": "assets/images/rossmann-logo.png",
+    "image": "https://marl.pl/assets/images/rossmann-logo-web.png",
     "url": "https://marl.pl/rossmann.html",
     "sameAs": ["https://www.rossmann.pl/"],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "ul. Zawoda 34",
+      "postalCode": "09-140",
       "addressLocality": "Raciąż",
       "addressCountry": "PL"
     },
@@ -47,15 +50,6 @@
   }
   </script>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NR3J2W5EFD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NR3J2W5EFD');
-</script>
 
 <body>
   <header class="site-header">
@@ -80,7 +74,7 @@
   </header>
 
   <main>
-    <section class="hero" style="background-image: url('assets/images/IMG_8711.jpg');">
+    <section class="hero" style="background-image: url('assets/images/park-1.jpg');">
       <div class="hero-inner">
         <h1>Rossmann</h1>
         <p>Drogeria i kosmetyki w Parku Handlowym Raciąż</p>
@@ -97,7 +91,7 @@
     <section class="section">
       <div class="shop-about">
         <div class="shop-logo reveal">
-          <img src="assets/images/rossmann-logo.png" alt="Rossmann" loading="lazy" decoding="async" />
+          <img src="assets/images/rossmann-logo-web.png" alt="Rossmann" loading="lazy" decoding="async" />
         </div>
         <div class="shop-text reveal">
           <h2>O sklepie</h2>
@@ -125,7 +119,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">
+    <div class="wrap">
       <div>
         <div class="footer-brand">
           <img src="assets/images/gem1.png" alt="Logo Park Handlowy Raciąż" />
@@ -144,8 +138,10 @@
       <div>
         <h4>Dane kontaktowe</h4>
         <ul>
-          <li>Adres: Raciąż, ul. Zawoda 34</li>
+          <li>Adres: ul. Zawoda 34, 09-140 Raciąż</li>
           <li>Email: <a href="mailto:biuro@marl.pl">biuro@marl.pl</a></li>
+          <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
+          <li class="js-only"><button type="button" class="footer-link" data-consent-open>Ustawienia cookies</button></li>
         </ul>
       </div>
     </div>

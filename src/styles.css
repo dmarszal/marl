@@ -49,7 +49,7 @@
 @layer components {
     /* Header */
     .site-header { @apply sticky top-0 z-50 bg-white border-b border-line; }
-    .site-header > nav:not(.breadcrumbs) { @apply max-w-6xl mx-auto px-8 py-4 flex items-center justify-between; }
+    .site-header > nav:not(.breadcrumbs) { @apply max-w-300 mx-auto px-6 py-4 flex items-center justify-between; }
     .site-header .logo img { @apply h-18.75 w-auto; }
     .nav-links { @apply flex gap-8; }
     .nav-links a { @apply inline-block px-3 py-2 border-b-2 border-transparent hover:text-brand; }
@@ -90,7 +90,7 @@
 
     /* Breadcrumbs (shop pages only), inside the sticky header */
     .breadcrumbs { @apply bg-surface border-t border-line; }
-    .breadcrumbs ol { @apply max-w-6xl mx-auto px-6 py-2 flex flex-wrap gap-2 text-sm text-muted; }
+    .breadcrumbs ol { @apply max-w-300 mx-auto px-6 py-2 flex flex-wrap gap-2 text-sm text-muted; }
     .breadcrumbs li + li::before { content: "/"; @apply mr-2; }
     .breadcrumbs a { @apply text-ink underline underline-offset-2; }
 
@@ -130,7 +130,7 @@
 
     /* Sections */
     .section { @apply px-6 py-10; }
-    .section > .container { @apply max-w-6xl mx-auto; }
+    .section > .wrap { @apply max-w-6xl mx-auto; }
     .section-title { @apply text-center mb-6; }
     .section-note { @apply text-center text-muted mt-6; }
 
@@ -160,13 +160,13 @@
 
     /* Info strip: the one dark surface, shared with the footer */
     .info-strip { @apply bg-ink text-white px-6 py-4; }
-    .info-strip .container { @apply max-w-6xl mx-auto grid gap-4 items-center grid-cols-[repeat(auto-fit,minmax(240px,1fr))]; }
+    .info-strip .wrap { @apply max-w-6xl mx-auto grid gap-4 items-center grid-cols-[repeat(auto-fit,minmax(240px,1fr))]; }
     .info-item { @apply flex gap-3 items-center; }
     .info-item span { @apply text-white/80; }
 
     /* Map */
     .map-section { @apply bg-surface px-8 py-16; }
-    .map-section .container { @apply max-w-6xl mx-auto; }
+    .map-section .wrap { @apply max-w-6xl mx-auto; }
     .map-header { @apply flex flex-wrap items-center justify-between gap-4 mb-6; }
     .map-header address { @apply not-italic text-muted; }
     .google-map { @apply w-full h-112.5 rounded-md overflow-hidden border border-line; }
@@ -209,7 +209,7 @@
 
     /* Footer: same dark surface as the info strip */
     .site-footer { @apply bg-ink text-white/80 px-6 py-12 mt-8; }
-    .site-footer .container { @apply max-w-6xl mx-auto grid gap-8 grid-cols-[2fr_1fr_1fr]; }
+    .site-footer .wrap { @apply max-w-6xl mx-auto grid gap-8 grid-cols-[2fr_1fr_1fr]; }
     .site-footer h4 { @apply text-white font-bold mb-3; }
     .site-footer a { @apply text-white/80 hover:text-white; }
     .site-footer li { @apply py-0.5; }
@@ -219,11 +219,37 @@
     .footer-about { @apply mt-3 max-w-105; }
     .footer-bottom { @apply max-w-6xl mx-auto text-center mt-6 pt-4 border-t border-white/10; }
     @media (max-width: 900px) {
-        .site-footer .container { @apply grid-cols-2; }
+        .site-footer .wrap { @apply grid-cols-2; }
     }
     @media (max-width: 600px) {
-        .site-footer .container { @apply grid-cols-1; }
+        .site-footer .wrap { @apply grid-cols-1; }
     }
+    .footer-link { @apply cursor-pointer text-white/80 underline-offset-2 hover:text-white hover:underline; }
+
+    /* Elements that only work with JS (consent buttons, map loader) */
+    html:not(.js) .js-only { @apply hidden; }
+
+    /* Privacy policy: plain long-form text */
+    .policy .wrap { @apply max-w-3xl; }
+    .policy h1 { @apply text-4xl font-extrabold mb-6; }
+    .policy h2 { @apply mt-8 mb-2; }
+    .policy p, .policy ul { @apply mt-3; }
+    .policy ul { @apply list-disc pl-6; }
+    .policy a { @apply underline underline-offset-2; }
+
+    /* Map placeholder until the visitor agrees to Google Maps */
+    .map-placeholder { @apply flex h-full flex-col items-center justify-center gap-3 bg-surface p-6 text-center; }
+    .map-placeholder p { @apply max-w-md text-muted; }
+    .map-placeholder a, .map-load { @apply font-semibold underline underline-offset-2; }
+    .map-load { @apply cursor-pointer text-brand; }
+
+    /* Consent banner, fixed to the bottom until a choice is made */
+    .consent { @apply fixed inset-x-0 bottom-0 z-60 bg-ink py-4 text-white; }
+    .consent-inner { @apply max-w-6xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4; }
+    .consent p { @apply max-w-3xl; }
+    .consent a { @apply text-white underline underline-offset-2 hover:text-white; }
+    .consent-actions { @apply flex gap-3; }
+    .consent :focus-visible { @apply outline-white; }
 }
 
 @keyframes wave-float {

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeHeroSlideshow();
     initializeReveal();
     initializeFooterYear();
+    initializeConsent();
 });
 
 // Initialize mobile menu functionality
@@ -101,5 +102,104 @@ function initializeReveal() {
 function initializeFooterYear() {
     document.querySelectorAll('[data-year]').forEach(el => {
         el.textContent = new Date().getFullYear();
+    });
+}
+
+// Consent for Google services. Google Analytics and the embedded Google Maps set cookies,
+// so neither loads until the visitor agrees. A map can also be shown once by clicking it.
+// The choice is kept in localStorage and can be changed from the footer.
+const CONSENT_KEY = 'marl-consent';
+const GA_ID = 'G-NR3J2W5EFD';
+
+function readConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch { return null; }
+}
+
+function saveConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch { /* private mode: ask again next time */ }
+}
+
+function loadAnalytics() {
+    if (window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function() { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script);
+}
+
+function removeAnalyticsCookies() {
+    const host = location.hostname;
+    const domains = ['', host, '.' + host, '.' + host.split('.').slice(-2).join('.')];
+    document.cookie.split(';').map(c => c.split('=')[0].trim())
+        .filter(name => name === '_ga' || name.startsWith('_ga_'))
+        .forEach(name => domains.forEach(d => {
+            document.cookie = `${name}=; Max-Age=0; path=/${d ? '; domain=' + d : ''}`;
+        }));
+}
+
+function loadMap(placeholder) {
+    const iframe = document.createElement('iframe');
+    iframe.title = placeholder.dataset.mapTitle;
+    iframe.src = placeholder.dataset.mapSrc;
+    iframe.loading = 'lazy';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    placeholder.replaceWith(iframe);
+}
+
+function loadAllMaps() {
+    document.querySelectorAll('[data-map-src]').forEach(loadMap);
+}
+
+function showConsentBanner() {
+    if (document.querySelector('.consent')) return;
+    const banner = document.createElement('section');
+    banner.className = 'consent';
+    banner.setAttribute('aria-label', 'Zgoda na pliki cookies');
+    banner.innerHTML = `
+        <div class="wrap consent-inner">
+            <p>Za Twoją zgodą używamy Google Analytics do statystyk odwiedzin i pokazujemy Mapy Google.
+            Obie usługi zapisują pliki cookies. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
+            <div class="consent-actions">
+                <button type="button" class="btn" data-consent="granted">Akceptuję</button>
+                <button type="button" class="btn" data-consent="denied">Odrzucam</button>
+            </div>
+        </div>`;
+    banner.addEventListener('click', e => {
+        const choice = e.target.dataset && e.target.dataset.consent;
+        if (!choice) return;
+        const previous = readConsent();
+        saveConsent(choice);
+        banner.remove();
+        if (choice === 'granted') {
+            loadAnalytics();
+            loadAllMaps();
+        } else if (previous === 'granted') {
+            // Withdrawing: drop the cookies and reload so the loaded scripts are gone too.
+            removeAnalyticsCookies();
+            location.reload();
+        }
+    });
+    document.body.appendChild(banner);
+}
+
+function initializeConsent() {
+    const consent = readConsent();
+    if (consent === 'granted') {
+        loadAnalytics();
+        loadAllMaps();
+    } else if (consent !== 'denied') {
+        showConsentBanner();
+    }
+
+    document.querySelectorAll('[data-map-load]').forEach(button => {
+        button.addEventListener('click', () => loadMap(button.closest('[data-map-src]')));
+    });
+    document.querySelectorAll('[data-consent-open]').forEach(button => {
+        button.addEventListener('click', showConsentBanner);
     });
 }

@@ -46,6 +46,19 @@ nie globalnie). Nie dotykaj globalnej konfiguracji SSH/git użytkownika.
 - Odrzucone: przeprojektowanie w stylu taste-skill (duży nagłówek do lewej, lista sklepów zamiast kafelków,
   usunięcie wszystkich linii i cieni). Nie proponuj ponownie bez pytania.
 
+## Zgoda na cookies (RODO)
+- Google Analytics (`G-NR3J2W5EFD`) i Mapy Google ładują się **dopiero po zgodzie** – baner i logika w
+  `main.js` (`initializeConsent`), wybór w `localStorage` pod kluczem `marl-consent` (`granted`/`denied`).
+  Nie wklejaj z powrotem snippetu gtag do HTML.
+- Mapy są w HTML jako `.map-placeholder` z `data-map-src`; iframe tworzy JS po zgodzie albo po kliknięciu „Pokaż mapę”.
+- „Ustawienia cookies” w stopce otwiera baner ponownie. Treść polityki: `polityka-prywatnosci.html`
+  (administrator: MARL Dariusz Marszał). Nowa usługa zewnętrzna = aktualizacja polityki i banera.
+
+## Obrazki
+- Strony używają wersji zoptymalizowanych: `park-1/2/3.jpg` (2400 px), `*-logo-web.png` (800 px),
+  `og-image.jpg` (1200×630, w `og:image` zawsze pełny adres `https://marl.pl/...`).
+- Oryginały (`IMG_*.jpg`, `hero-bg.jpg`, duże PNG) zostają w repo celowo – nie usuwaj ich bez pytania.
+
 ## Pułapki
 - Nie używaj klasy `container` – koliduje z utility Tailwinda `container` (max-width 1280 px) i rozjeżdża marginesy.
 - Przy zmianie godzin sklepu popraw je w trzech miejscach: kafelek na `index.html`, tabela na stronie sklepu

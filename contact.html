@@ -17,24 +17,17 @@
     <meta property="og:site_name" content="Park Handlowy Raciąż">
     <meta property="og:title" content="Kontakt – Park Handlowy Raciąż">
     <meta property="og:description" content="Adres, godziny pracy biura i mapa dojazdu. Skontaktuj się z nami.">
-    <meta property="og:image" content="assets/images/hero-bg.jpg">
+    <meta property="og:image" content="https://marl.pl/assets/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kontakt – Park Handlowy Raciąż">
     <meta name="twitter:description" content="Adres, godziny pracy biura i mapa dojazdu. Skontaktuj się z nami.">
-    <meta name="twitter:image" content="assets/images/hero-bg.jpg">
+    <meta name="twitter:image" content="https://marl.pl/assets/images/og-image.jpg">
     
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NR3J2W5EFD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NR3J2W5EFD');
-</script>
 
 <body>
   <header class="site-header">
@@ -52,7 +45,7 @@
   </header>
 
   <main>
-    <section class="hero" style="background-image: url('assets/images/hero-bg.jpg');">
+    <section class="hero" style="background-image: url('assets/images/park-3.jpg');">
       <div class="hero-inner">
         <h1>Kontakt</h1>
         <p>Napisz do nas — odpowiadamy w dni robocze.</p>
@@ -92,13 +85,17 @@
 
     <section class="map-section full-width" id="mapa">
       <div class="google-map">
-        <iframe title="Mapa: Raciąż, ul. Zawoda 34" src="https://www.google.com/maps?q=Zawoda%2034%2C%2009-140%20Raci%C4%85%C5%BC&output=embed&hl=pl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-placeholder" data-map-src="https://www.google.com/maps?q=Zawoda%2034%2C%2009-140%20Raci%C4%85%C5%BC&output=embed&hl=pl" data-map-title="Mapa: ul. Zawoda 34, 09-140 Raciąż">
+            <p>Mapa Google wczyta się po Twojej zgodzie, bo Google zapisuje przy niej pliki cookies.</p>
+            <button type="button" class="map-load js-only" data-map-load>Pokaż mapę</button>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Zawoda%2034%2C%2009-140%20Raci%C4%85%C5%BC" target="_blank" rel="noopener">Otwórz w Mapach Google</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
+    <div class="wrap">
       <div>
         <div class="footer-brand">
           <img src="assets/images/gem1.png" alt="Logo Park Handlowy Raciąż" />
@@ -117,8 +114,10 @@
       <div>
         <h4>Dane kontaktowe</h4>
         <ul>
-          <li>Adres: Raciąż, ul. Zawoda 34</li>
+          <li>Adres: ul. Zawoda 34, 09-140 Raciąż</li>
           <li>Email: <a href="mailto:biuro@marl.pl">biuro@marl.pl</a></li>
+          <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
+          <li class="js-only"><button type="button" class="footer-link" data-consent-open>Ustawienia cookies</button></li>
         </ul>
       </div>
     </div>
