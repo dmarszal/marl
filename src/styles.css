@@ -23,7 +23,7 @@
     --color-pepco: #005bbb;
     --color-pepco-alt: #7a36a1;
 
-    --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
     --radius-*: initial;
     --radius-sm: 4px;
@@ -32,6 +32,25 @@
     --shadow-*: initial;
     --shadow-tile: 0 2px 10px rgb(0 0 0 / 0.1);
     --shadow-tile-hover: 0 6px 18px rgb(0 0 0 / 0.12);
+}
+
+/* Inter, self-hosted (assets/fonts, copied by `npm run fonts`); never load it from Google Fonts (GDPR).
+   Paths are relative to the built file assets/css/style.css. */
+@font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("../fonts/inter-latin-ext-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @layer base {
@@ -99,6 +118,8 @@
     .hero::after { content: ""; @apply absolute inset-0 z-1 bg-black/55; }
     .hero-inner { @apply relative z-3 max-w-4xl; }
     .hero h1 { @apply text-5xl font-extrabold tracking-wide mb-3; }
+    /* Brand accent under the title; the title itself stays white for contrast on the photo */
+    .hero h1::after { content: ""; @apply block w-32 h-1 mx-auto mt-3 rounded-full bg-gold; }
     .hero p { @apply text-xl font-medium mb-6; }
     .hero-slides { @apply absolute inset-0 z-0; }
     .hero-slide { @apply absolute inset-0 bg-cover bg-center opacity-0; }
@@ -114,6 +135,9 @@
         .hero { @apply min-h-[46vh]; }
         .hero h1 { @apply text-4xl; }
         .hero p { @apply text-lg; }
+    }
+    @media (max-width: 380px) {
+        .hero h1 { @apply text-3xl; }
     }
 
     /* Hero wave divider, colors set per page on the paths */

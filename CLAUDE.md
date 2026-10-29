@@ -36,6 +36,7 @@ nie globalnie). Nie dotykaj globalnej konfiguracji SSH/git użytkownika.
 - Nagłówek `sticky`, logo 75 px (po przewinięciu 44 px; mobile 45/32 px), logo i menu w jednym wierszu na telefonie.
   Okruszki tylko na stronach sklepów, wewnątrz nagłówka. Aktywne menu = podkreślenie + `aria-current="page"`.
 - Hero: jedna nakładka `bg-black/55` wszędzie (kontrast tekstu ≥ 4,5:1 zmierzony na zdjęciach).
+  Tytuł hero zostaje biały (złoto na zdjęciu jest nieczytelne, ~2,7:1); marka = złota kreska pod tytułem.
 - Treść musi być widoczna bez JS: animacje tylko pod `.js` (klasa ustawiana inline w `<head>`)
   i `prefers-reduced-motion: no-preference`.
 - Cień tylko na klikalnych kafelkach; fala pod hero i unoszenie kart zostają (świadoma decyzja).
@@ -53,6 +54,12 @@ nie globalnie). Nie dotykaj globalnej konfiguracji SSH/git użytkownika.
 - Mapy są w HTML jako `.map-placeholder` z `data-map-src`; iframe tworzy JS po zgodzie albo po kliknięciu „Pokaż mapę”.
 - „Ustawienia cookies” w stopce otwiera baner ponownie. Treść polityki: `polityka-prywatnosci.html`
   (administrator: MARL Dariusz Marszał). Nowa usługa zewnętrzna = aktualizacja polityki i banera.
+
+## Font
+- Inter Variable, **hostowany lokalnie** w `assets/fonts/` (latin + latin-ext dla polskich znaków, licencja OFL obok).
+  Źródło: pakiet `@fontsource-variable/inter`; po jego aktualizacji `npm run fonts` kopiuje pliki. Pliki są w repo.
+- Nigdy nie ładuj fontów z Google Fonts – to przesyła IP odwiedzających do Google (RODO, bez zgody).
+- Inter jest szerszy niż poprzedni Segoe UI – przy zmianie tytułów sprawdzaj 320 px (max 2 linie).
 
 ## Obrazki
 - Strony używają wersji zoptymalizowanych: `park-1/2/3.jpg` (2400 px), `*-logo-web.png` (800 px),
