@@ -1,3 +1,9 @@
 node_modules/
 _site/
 assets/css/style.css
+
+# Local Claude Code skills and settings
+.claude/skills/
+.claude/settings.local.json
+skills-lock.json
+.taste-skill/
