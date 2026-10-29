@@ -1,121 +1,21 @@
-// Sample property data (in a real app, this would come from a backend API)
-const properties = [
-    {
-        id: 1,
-        title: 'Topaz - Supermarket Spożywczy',
-        price: 2500,
-        bedrooms: 2,
-        bathrooms: 2,
-        sqft: 1200,
-        location: 'Raciąż',
-        image: 'property1.jpg',
-        featured: true
-    },
-    {
-        id: 2,
-        title: 'Rossmann',
-        price: 3500,
-        bedrooms: 4,
-        bathrooms: 3,
-        sqft: 2400,
-        location: 'Raciąż',
-        image: 'property2.jpg',
-        featured: true
-    },
-    {
-        id: 3,
-        title: 'Pepco',
-        price: 5000,
-        bedrooms: 5,
-        bathrooms: 4.5,
-        sqft: 3800,
-        location: 'Raciąż',
-        image: 'property3.jpg',
-        featured: true
-    }
-];
+// Content is fully visible without JS; this file only adds motion and the menu toggle.
+// The `js` class on <html> is set by an inline script in <head>.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the page
-    initializePage();
-    
-    // Add smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
-
-// Initialize the page
-function initializePage() {
-    // Load featured properties
-    displayFeaturedProperties();
-    
-    // Initialize any other components
     initializeMobileMenu();
-    initializePromoRotator();
+    initializeCompactHeader();
     initializeHeroSlideshow();
-    initializeTenantReveal();
-}
-
-// Display featured properties on the homepage
-function displayFeaturedProperties() {
-    const propertyGrid = document.querySelector('.property-grid');
-    
-    if (!propertyGrid) return;
-    
-    // Clear any existing content
-    propertyGrid.innerHTML = '';
-    
-    // Filter featured properties
-    const featuredProperties = properties.filter(property => property.featured);
-    
-    // Create property cards
-    featuredProperties.forEach(property => {
-        const propertyCard = createPropertyCard(property);
-        propertyGrid.appendChild(propertyCard);
-    });
-}
-
-// Create a property card element
-function createPropertyCard(property) {
-    const card = document.createElement('div');
-    card.className = 'property-card';
-    
-    card.innerHTML = `
-        <div class="property-image" style="background-image: url('../images/properties/${property.image}')">
-            <div class="property-price">${property.price.toLocaleString()} zł/mies.</div>
-        </div>
-        <div class="property-details">
-            <h3>${property.title}</h3>
-            <p class="property-location">${property.location}</p>
-            <div class="property-features">
-                <span>${property.bedrooms} Pokoje</span>
-                <span>${property.bathrooms} Łazienki</span>
-                <span>${property.sqft.toLocaleString()} m²</span>
-            </div>
-            <a href="contact.html?property=${property.id}" class="cta-button">Zapytaj o tę nieruchomość</a>
-        </div>
-    `;
-    
-    return card;
-}
+    initializeReveal();
+    initializeFooterYear();
+});
 
 // Initialize mobile menu functionality
 function initializeMobileMenu() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    
+
     if (menuToggle && navLinks) {
-        // initialize ARIA state
         menuToggle.setAttribute('aria-expanded', 'false');
 
         menuToggle.addEventListener('click', function() {
@@ -126,8 +26,7 @@ function initializeMobileMenu() {
 
         // close menu when a link is clicked (use event delegation)
         navLinks.addEventListener('click', function(e) {
-            const target = e.target;
-            if (target && target.tagName === 'A' && navLinks.classList.contains('active')) {
+            if (e.target.tagName === 'A' && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 menuToggle.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
@@ -136,31 +35,52 @@ function initializeMobileMenu() {
     }
 }
 
-// Crossfade hero slideshow on pages that contain .hero-slide elements
+// Shrink the sticky header after scrolling. The gap between the two thresholds
+// is larger than the height the header loses, so shrinking can't flip it back.
+function initializeCompactHeader() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    let ticking = false;
+    const update = () => {
+        const y = window.scrollY;
+        if (y > 100) header.classList.add('is-scrolled');
+        else if (y < 20) header.classList.remove('is-scrolled');
+        ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+}
+
+// Crossfade hero slideshow; the first slide is shown by CSS when JS is off
 function initializeHeroSlideshow() {
-    const slides = document.querySelectorAll('.hero .hero-slides .hero-slide');
+    const slides = document.querySelectorAll('.hero-slides .hero-slide');
     if (!slides.length) return;
 
     let index = 0;
-    // ensure exactly one active at start
     slides.forEach((s, i) => s.classList.toggle('is-active', i === 0));
-
-    const next = () => {
-        const current = slides[index];
-        index = (index + 1) % slides.length;
-        const upcoming = slides[index];
-        if (current) current.classList.remove('is-active');
-        if (upcoming) upcoming.classList.add('is-active');
-    };
+    if (reduceMotion || slides.length < 2) return;
 
     // rotate every 6 seconds
-    setInterval(next, 6000);
+    setInterval(() => {
+        slides[index].classList.remove('is-active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('is-active');
+    }, 6000);
 }
 
-// Reveal tenant cards and shop sections on scroll (slide-in animation)
-function initializeTenantReveal() {
-    const revealTargets = document.querySelectorAll('.tenant-card, .shop-logo, .shop-text');
-    if (!revealTargets.length) return;
+// Slide-in for elements marked .reveal; CSS hides them only when motion is allowed
+function initializeReveal() {
+    const targets = document.querySelectorAll('.reveal');
+    if (!targets.length) return;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('in-view'));
+        return;
+    }
 
     const observer = new IntersectionObserver(
         (entries, obs) => {
@@ -171,104 +91,15 @@ function initializeTenantReveal() {
                 }
             });
         },
-        { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
     );
 
-    revealTargets.forEach(el => observer.observe(el));
+    targets.forEach(el => observer.observe(el));
 }
 
-// Simple announcements rotator for the promo strip
-function initializePromoRotator() {
-    const messageEl = document.querySelector('.promo .message');
-    if (!messageEl) return;
-
-    const messages = [
-        'Nowe godziny otwarcia: Poniedziałek–Sobota 7:00–21:00',
-        'Zapraszamy do zakupów!',
-        'Bezpłatny parking dla klientów ',
-        'Wygodny dojazd',
-        'Topaz • Rossmann • Pepco – wszystko w jednym miejscu',
-        '24/7 odbiór paczek InPost i Allegro One Box'
-    ];
-
-    let idx = 0;
-    let timerId = null;
-
-    const update = () => {
-        messageEl.style.opacity = '0';
-        setTimeout(() => {
-            messageEl.textContent = messages[idx];
-            messageEl.style.opacity = '1';
-            idx = (idx + 1) % messages.length;
-        }, 200);
-    };
-
-    // Initial paint
-    messageEl.style.transition = 'opacity 250ms ease';
-    messageEl.textContent = messages[0];
-    idx = 1;
-
-    // Auto-rotate
-    const start = () => { if (!timerId) timerId = setInterval(update, 5000); };
-    const stop = () => { if (timerId) { clearInterval(timerId); timerId = null; } };
-    start();
-
-    // Pause on hover for accessibility
-    const promo = document.querySelector('.promo');
-    if (promo) {
-        promo.addEventListener('mouseenter', stop);
-        promo.addEventListener('mouseleave', start);
-    }
-}
-
-// Form validation for contact form
-function validateForm(form) {
-    let isValid = true;
-    const email = form.querySelector('input[type="email"]');
-    const phone = form.querySelector('input[type="tel"]');
-    const message = form.querySelector('textarea');
-    
-    // Simple email validation
-    if (email && !/\S+@\S+\.\S+/.test(email.value)) {
-        showError(email, 'Proszę podać prawidłowy adres email');
-        isValid = false;
-    }
-    
-    // Simple phone validation (at least 9 digits for Polish numbers)
-    if (phone && phone.value.replace(/\D/g, '').length < 9) {
-        showError(phone, 'Proszę podać prawidłowy numer telefonu');
-        isValid = false;
-    }
-    
-    // Check if message is not empty
-    if (message && message.value.trim() === '') {
-        showError(message, 'Proszę wprowadzić wiadomość');
-        isValid = false;
-    }
-    
-    return isValid;
-}
-
-// Show error message for form fields
-function showError(input, message) {
-    const formGroup = input.closest('.form-group');
-    if (!formGroup) return;
-    
-    let errorElement = formGroup.querySelector('.error-message');
-    
-    if (!errorElement) {
-        errorElement = document.createElement('div');
-        errorElement.className = 'error-message';
-        formGroup.appendChild(errorElement);
-    }
-    
-    errorElement.textContent = message;
-    formGroup.classList.add('has-error');
-    
-    // Remove error on input
-    input.addEventListener('input', function clearError() {
-        errorElement.textContent = '';
-        formGroup.classList.remove('has-error');
-        input.removeEventListener('input', clearError);
+// Current year in the footer; the markup holds a fallback year
+function initializeFooterYear() {
+    document.querySelectorAll('[data-year]').forEach(el => {
+        el.textContent = new Date().getFullYear();
     });
 }

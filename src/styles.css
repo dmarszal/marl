@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+/* Tokens. The default palette is cleared so only these colors exist. */
+@theme static {
+    --color-*: initial;
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    /* Brand: sampled from the MARL logo (assets/images/gem1.png) */
+    --color-brand: #0c686e;        /* white text 6.5:1 */
+    --color-brand-dark: #08494d;   /* hover */
+    --color-gold: #d7bf8e;         /* accent only, never a state indicator */
+
+    /* Neutrals: 4 levels */
+    --color-ink: #22272b;          /* text and the one dark surface */
+    --color-muted: #5b6670;        /* secondary text, 5.9:1 on white */
+    --color-line: #d9dde1;         /* borders and dividers */
+    --color-surface: #f4f5f6;      /* light section background */
+
+    /* Tenant brands */
+    --color-topaz: #e31e25;
+    --color-rossmann: #c0002b;
+    --color-pepco: #005bbb;
+    --color-pepco-alt: #7a36a1;
+
+    --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    --radius-*: initial;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+
+    --shadow-*: initial;
+    --shadow-tile: 0 2px 10px rgb(0 0 0 / 0.1);
+    --shadow-tile-hover: 0 6px 18px rgb(0 0 0 / 0.12);
+}
+
+@layer base {
+    html { scroll-padding-top: 6rem; }
+    @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+    }
+    body { @apply font-sans leading-relaxed text-ink bg-white; }
+    a { @apply text-ink transition-colors hover:text-brand; }
+    :focus-visible { @apply outline-2 outline-offset-2 outline-brand; }
+    h2 { @apply text-2xl font-bold text-ink; }
+    h3 { @apply text-lg font-bold text-ink; }
+}
+
+@layer components {
+    /* Header */
+    .site-header { @apply sticky top-0 z-50 bg-white border-b border-line; }
+    .site-header > nav:not(.breadcrumbs) { @apply max-w-6xl mx-auto px-8 py-4 flex items-center justify-between; }
+    .site-header .logo img { @apply h-18.75 w-auto; }
+    .nav-links { @apply flex gap-8; }
+    .nav-links a { @apply inline-block px-3 py-2 border-b-2 border-transparent hover:text-brand; }
+    .nav-links a[aria-current="page"] { @apply border-brand text-brand font-semibold; }
+
+    .mobile-menu-toggle { @apply hidden items-center justify-center w-11 h-11 rounded-md border border-line bg-white text-ink cursor-pointer; }
+    .mobile-menu-toggle .bars,
+    .mobile-menu-toggle .bars::before,
+    .mobile-menu-toggle .bars::after { @apply block w-5 h-0.5 bg-current; }
+    .mobile-menu-toggle .bars { @apply relative; }
+    .mobile-menu-toggle .bars::before,
+    .mobile-menu-toggle .bars::after { content: ""; @apply absolute left-0; }
+    .mobile-menu-toggle .bars::before { @apply -top-1.5; }
+    .mobile-menu-toggle .bars::after { @apply top-1.5; }
+    .mobile-menu-toggle.active .bars { @apply bg-transparent; }
+    .mobile-menu-toggle.active .bars::before { @apply translate-y-1.5 rotate-45; }
+    .mobile-menu-toggle.active .bars::after { @apply -translate-y-1.5 -rotate-45; }
+
+    @media (max-width: 700px) {
+        .site-header > nav:not(.breadcrumbs) { @apply px-4 py-3 flex-wrap gap-y-1; }
+        .site-header .logo img { @apply h-11.25; }
+        .mobile-menu-toggle { @apply inline-flex ml-auto; }
+        .nav-links { @apply hidden basis-full flex-col gap-0; }
+        .nav-links.active { @apply flex; }
+        .nav-links a { @apply block py-3; }
+    }
+
+    /* Compact header after scrolling (class set by main.js) */
+    .site-header.is-scrolled > nav:not(.breadcrumbs) { @apply py-2; }
+    .site-header.is-scrolled .logo img { @apply h-11; }
+    @media (max-width: 700px) {
+        .site-header.is-scrolled .logo img { @apply h-8; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .site-header > nav:not(.breadcrumbs) { transition: padding .2s ease; }
+        .site-header .logo img { transition: height .2s ease; }
+    }
+
+    /* Breadcrumbs (shop pages only), inside the sticky header */
+    .breadcrumbs { @apply bg-surface border-t border-line; }
+    .breadcrumbs ol { @apply max-w-6xl mx-auto px-6 py-2 flex flex-wrap gap-2 text-sm text-muted; }
+    .breadcrumbs li + li::before { content: "/"; @apply mr-2; }
+    .breadcrumbs a { @apply text-ink underline underline-offset-2; }
+
+    /* Hero: one overlay value everywhere */
+    .hero { @apply relative flex items-center justify-center text-center text-white min-h-[55vh] px-6 py-16 overflow-hidden bg-ink bg-cover bg-center; }
+    .hero::after { content: ""; @apply absolute inset-0 z-1 bg-black/55; }
+    .hero-inner { @apply relative z-3 max-w-4xl; }
+    .hero h1 { @apply text-5xl font-extrabold tracking-wide mb-3; }
+    .hero p { @apply text-xl font-medium mb-6; }
+    .hero-slides { @apply absolute inset-0 z-0; }
+    .hero-slide { @apply absolute inset-0 bg-cover bg-center opacity-0; }
+    .hero-slide:first-child { @apply opacity-100; }
+    .js .hero-slide { @apply transition-opacity duration-700; }
+    .js .hero-slide:first-child:not(.is-active) { @apply opacity-0; }
+    .js .hero-slide.is-active { @apply opacity-100; }
+    @media (prefers-reduced-motion: no-preference) {
+        .js .hero-slide { transition: opacity .8s ease, transform 6s ease; }
+        .js .hero-slide.is-active { @apply scale-106; }
+    }
+    @media (max-width: 768px) {
+        .hero { @apply min-h-[46vh]; }
+        .hero h1 { @apply text-4xl; }
+        .hero p { @apply text-lg; }
+    }
+
+    /* Hero wave divider, colors set per page on the paths */
+    .hero-wave { @apply absolute inset-x-0 -bottom-px h-21 z-2 pointer-events-none; }
+    .hero-wave svg { @apply block w-full h-full; }
+    @media (prefers-reduced-motion: no-preference) {
+        .hero-wave path:nth-child(1) { animation: wave-float 24s ease-in-out infinite; }
+        .hero-wave path:nth-child(2) { animation: wave-float 20s ease-in-out 1.2s infinite; }
+        .hero-wave path:nth-child(3) { animation: wave-float 16s ease-in-out 2.4s infinite; }
+    }
+
+    /* Buttons: one primary per section */
+    .btn { @apply inline-block rounded-sm bg-brand px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-dark hover:text-white; }
+
+    /* Sections */
+    .section { @apply px-6 py-10; }
+    .section > .container { @apply max-w-6xl mx-auto; }
+    .section-title { @apply text-center mb-6; }
+    .section-note { @apply text-center text-muted mt-6; }
+
+    /* Tiles: only clickable tiles get a shadow */
+    .tile-grid { @apply grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]; }
+    @media (min-width: 768px) {
+        .tile-grid { @apply grid-cols-3; }
+    }
+    .tile { @apply flex items-center justify-center h-37.5 p-2 rounded-md border border-line bg-white; }
+    .tile img { @apply w-full h-full object-contain; }
+    a.tile { @apply shadow-tile transition-[box-shadow,transform] duration-200 hover:shadow-tile-hover hover:-translate-y-0.5; }
+    .tenant-item { @apply flex flex-col items-center gap-1; }
+    .tenant-item .tile { @apply w-full; }
+    .tenant-hours { @apply text-center text-muted; }
+    @media (max-width: 480px) {
+        .tile { @apply h-47.5; }
+    }
+
+    /* Reveal on scroll: hidden only when JS runs and motion is allowed */
+    @media (prefers-reduced-motion: no-preference) {
+        .js .reveal { transition: opacity .45s ease var(--reveal-delay, 0s), transform .45s ease var(--reveal-delay, 0s), box-shadow .2s ease; }
+        .js .reveal:not(.in-view) { @apply opacity-0 -translate-y-4.5; }
+        .tile-grid > :nth-child(2) .reveal, .tile-grid > .reveal:nth-child(2) { --reveal-delay: 450ms; }
+        .tile-grid > :nth-child(3) .reveal, .tile-grid > .reveal:nth-child(3) { --reveal-delay: 900ms; }
+        .shop-text.reveal { --reveal-delay: 200ms; }
+    }
+
+    /* Info strip: the one dark surface, shared with the footer */
+    .info-strip { @apply bg-ink text-white px-6 py-4; }
+    .info-strip .container { @apply max-w-6xl mx-auto grid gap-4 items-center grid-cols-[repeat(auto-fit,minmax(240px,1fr))]; }
+    .info-item { @apply flex gap-3 items-center; }
+    .info-item span { @apply text-white/80; }
+
+    /* Map */
+    .map-section { @apply bg-surface px-8 py-16; }
+    .map-section .container { @apply max-w-6xl mx-auto; }
+    .map-header { @apply flex flex-wrap items-center justify-between gap-4 mb-6; }
+    .map-header address { @apply not-italic text-muted; }
+    .google-map { @apply w-full h-112.5 rounded-md overflow-hidden border border-line; }
+    .google-map iframe { @apply w-full h-full border-0; }
+    .map-section.full-width { @apply p-0; }
+    .map-section.full-width .google-map { @apply h-169 rounded-none border-0; }
+
+    /* Shop pages */
+    .shop-about { @apply max-w-4xl mx-auto grid gap-6 items-start grid-cols-[240px_1fr]; }
+    .shop-logo { @apply flex items-center justify-center h-50 p-3 rounded-md border border-line bg-white; }
+    .shop-logo img { @apply max-w-full max-h-full object-contain; }
+    .shop-text p { @apply mt-3; }
+    .shop-actions { @apply mt-6 flex flex-wrap items-center gap-6; }
+    .shop-actions .link { @apply font-semibold underline underline-offset-2; }
+    @media (max-width: 700px) {
+        .shop-about { @apply grid-cols-1 gap-4; }
+        .shop-logo { @apply max-w-80 w-full mx-auto h-45; }
+    }
+
+    .hours { @apply mt-6; }
+    .hours h3 { @apply mb-2; }
+    .hours-table { @apply w-full max-w-md border-collapse; }
+    .hours-table tr { @apply border-b border-line last:border-b-0; }
+    .hours-table td { @apply py-2; }
+    .hours-table td:last-child { @apply text-right font-medium whitespace-nowrap pl-4; }
+
+    /* Contact page: nothing here is clickable except links, so no shadows */
+    .contact-layout { @apply max-w-6xl mx-auto grid gap-6 items-stretch grid-cols-[380px_1fr]; }
+    .contact-brand { @apply flex items-center justify-center rounded-md border border-line bg-surface; }
+    .contact-brand img { @apply max-w-[60%] max-h-[60%] object-contain; }
+    .contact-grid { @apply grid gap-4 grid-cols-[repeat(auto-fit,minmax(240px,1fr))]; }
+    .contact-card { @apply rounded-md border border-line bg-white p-4; }
+    .contact-card h3 { @apply mb-2; }
+    .contact-card .note { @apply text-muted; }
+    .hours-list li { @apply py-1 border-b border-dashed border-line last:border-b-0 text-muted; }
+    @media (max-width: 900px) {
+        .contact-layout { @apply grid-cols-1; }
+        .contact-brand { @apply h-60; }
+    }
+
+    /* Footer: same dark surface as the info strip */
+    .site-footer { @apply bg-ink text-white/80 px-6 py-12 mt-8; }
+    .site-footer .container { @apply max-w-6xl mx-auto grid gap-8 grid-cols-[2fr_1fr_1fr]; }
+    .site-footer h4 { @apply text-white font-bold mb-3; }
+    .site-footer a { @apply text-white/80 hover:text-white; }
+    .site-footer li { @apply py-0.5; }
+    .site-footer :focus-visible { @apply outline-white; }
+    .footer-brand { @apply flex items-center gap-3 text-white; }
+    .footer-brand img { @apply h-9 w-auto; }
+    .footer-about { @apply mt-3 max-w-105; }
+    .footer-bottom { @apply max-w-6xl mx-auto text-center mt-6 pt-4 border-t border-white/10; }
+    @media (max-width: 900px) {
+        .site-footer .container { @apply grid-cols-2; }
+    }
+    @media (max-width: 600px) {
+        .site-footer .container { @apply grid-cols-1; }
+    }
+}
+
+@keyframes wave-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}

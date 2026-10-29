@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js');</script>
   <title>Rossmann | Park Handlowy Raciąż</title>
   <meta name="description" content="Drogeria Rossmann w Parku Handlowym Raciąż. Zobacz opis, godziny otwarcia oraz przejdź na stronę WWW sklepu." />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -32,7 +33,6 @@
     "image": "assets/images/rossmann-logo.png",
     "url": "https://marl.pl/rossmann.html",
     "sameAs": ["https://www.rossmann.pl/"],
-    "telephone": "+42 613 97 00",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "ul. Zawoda 34",
@@ -58,80 +58,67 @@
 </script>
 
 <body>
-  <header>
-    <nav>
+  <header class="site-header">
+    <nav aria-label="Menu główne">
       <div class="logo">
-        <a href="index.html"><img src="assets/images/gem1.png" alt="MARL Logo" height="40" /></a>
+        <a href="index.html"><img src="assets/images/gem1.png" alt="MARL Logo" height="75" /></a>
       </div>
       <button class="mobile-menu-toggle" aria-label="Menu" aria-controls="primary-nav"><span class="bars"></span></button>
       <ul class="nav-links" id="primary-nav">
         <li><a href="index.html">Strona Główna</a></li>
-        <li><a href="sklepy.html" class="active">Sklepy</a></li>
+        <li><a href="sklepy.html" aria-current="page">Sklepy</a></li>
         <li><a href="contact.html">Kontakt</a></li>
       </ul>
+    </nav>
+    <nav class="breadcrumbs" aria-label="Okruszki nawigacji">
+      <ol>
+        <li><a href="index.html">Strona Główna</a></li>
+        <li><a href="sklepy.html">Sklepy</a></li>
+        <li aria-current="page">Rossmann</li>
+      </ol>
     </nav>
   </header>
 
   <main>
-    <nav class="breadcrumbs" aria-label="Okruszki nawigacji">
-      <div class="container">
-        <a href="index.html">Strona Główna</a>
-        <span class="sep">/</span>
-        <a href="index.html#sklepy">Najemcy</a>
-        <span class="sep">/</span>
-        <span class="current" aria-current="page">Rossmann</span>
-      </div>
-    </nav>
-    <section class="hero" style="--hero-overlay: .52; background-image: url('assets/images/IMG_8711.jpg');">
+    <section class="hero" style="background-image: url('assets/images/IMG_8711.jpg');">
       <div class="hero-inner">
         <h1>Rossmann</h1>
         <p>Drogeria i kosmetyki w Parku Handlowym Raciąż</p>
-        <div class="actions">
-          <a class="cta-button" href="#godziny">Godziny otwarcia</a>
-          <a class="cta-button btn-secondary" href="https://www.rossmann.pl/" target="_blank" rel="noopener">WWW sklepu</a>
-        </div>
       </div>
       <div class="hero-wave" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-          <path fill="var(--brand-rossmann)" opacity="0.20" d="M0,80 C240,120 480,0 720,40 C960,80 1200,60 1440,20 L1440,120 L0,120 Z"></path>
-          <path fill="var(--brand-rossmann)" opacity="0.35" d="M0,70 C240,110 480,20 720,60 C960,100 1200,70 1440,30 L1440,120 L0,120 Z"></path>
+          <path fill="var(--color-rossmann)" opacity="0.20" d="M0,80 C240,120 480,0 720,40 C960,80 1200,60 1440,20 L1440,120 L0,120 Z"></path>
+          <path fill="var(--color-rossmann)" opacity="0.35" d="M0,70 C240,110 480,20 720,60 C960,100 1200,70 1440,30 L1440,120 L0,120 Z"></path>
           <path fill="#ffffff" d="M0,90 C240,130 480,40 720,80 C960,120 1200,80 1440,40 L1440,120 L0,120 Z"></path>
         </svg>
       </div>
     </section>
 
-    <section class="tenants" style="padding-top:2rem; padding-bottom:2rem;">
-      <div class="container" style="max-width: 900px;">
-        <div class="shop-about">
-          <div class="shop-logo">
-            <img src="assets/images/rossmann-logo.png" alt="Rossmann" loading="lazy" decoding="async" />
-          </div>
-          <div class="shop-text">
-            <h2>O sklepie</h2>
-            <p style="margin-top: .75rem;">Rossmann oferuje szeroki wybór kosmetyków, chemii domowej i akcesoriów higienicznych. Sklep w Parku Handlowym Raciąż zapewnia wygodne zakupy i atrakcyjne promocje.</p>
-            <div class="actions" style="margin-top:1rem;">
-              <a class="cta-button" href="https://www.rossmann.pl/" target="_blank" rel="noopener">Odwiedź stronę WWW</a>
-              <a class="cta-button btn-secondary" href="https://www.rossmann.pl/promocje" target="_blank" rel="noopener">Aktualne promocje</a>
-            </div>
-          </div>
+    <section class="section">
+      <div class="shop-about">
+        <div class="shop-logo reveal">
+          <img src="assets/images/rossmann-logo.png" alt="Rossmann" loading="lazy" decoding="async" />
         </div>
-      </div>
-    </section>
-
-    <section class="map-section" id="godziny" style="padding-top:0;">
-      <div class="map-container">
-        <div class="hours-card" aria-labelledby="hours-title">
-          <h3 id="hours-title">Godziny otwarcia</h3>
-          <table class="hours-table" role="table">
-            <tr>
-              <td>Poniedziałek – Sobota</td>
-              <td>9:00 – 20:00</td>
-            </tr>
-            <tr>
-              <td>Niedziela</td>
-              <td>Zamknięte</td>
-            </tr>
-          </table>
+        <div class="shop-text reveal">
+          <h2>O sklepie</h2>
+          <p>Rossmann oferuje szeroki wybór kosmetyków, chemii domowej i akcesoriów higienicznych. Sklep w Parku Handlowym Raciąż zapewnia wygodne zakupy i atrakcyjne promocje.</p>
+          <div class="hours" id="godziny">
+            <h3>Godziny otwarcia</h3>
+            <table class="hours-table">
+              <tr>
+                <td>Poniedziałek – Sobota</td>
+                <td>9:00 – 20:00</td>
+              </tr>
+              <tr>
+                <td>Niedziela</td>
+                <td>Zamknięte</td>
+              </tr>
+            </table>
+          </div>
+          <div class="shop-actions">
+            <a class="btn" href="https://www.rossmann.pl/promocje" target="_blank" rel="noopener">Aktualne promocje</a>
+            <a class="link" href="https://www.rossmann.pl/" target="_blank" rel="noopener">Strona sklepu</a>
+          </div>
         </div>
       </div>
     </section>
@@ -144,13 +131,13 @@
           <img src="assets/images/gem1.png" alt="Logo Park Handlowy Raciąż" />
           <strong>Park Handlowy Raciąż</strong>
         </div>
-        <p style="margin-top:.75rem; max-width: 420px;">Nowoczesny park handlowy w Raciążu. Wygodne zakupy blisko Ciebie: Topaz, Rossmann, Pepco i więcej.</p>
+        <p class="footer-about">Nowoczesny park handlowy w Raciążu. Wygodne zakupy blisko Ciebie: Topaz, Rossmann, Pepco oraz paczkomaty InPost i Allegro.</p>
       </div>
       <div>
         <h4>Nawigacja</h4>
         <ul>
           <li><a href="index.html">Strona Główna</a></li>
-          <li><a href="#godziny">Godziny otwarcia</a></li>
+          <li><a href="sklepy.html">Sklepy</a></li>
           <li><a href="contact.html">Kontakt</a></li>
         </ul>
       </div>
@@ -161,16 +148,9 @@
           <li>Email: <a href="mailto:biuro@marl.pl">biuro@marl.pl</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Social</h4>
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-        </ul>
-      </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 MARL. Wszelkie prawa zastrzeżone.</p>
+      <p>&copy; <span data-year>2026</span> MARL. Wszelkie prawa zastrzeżone.</p>
     </div>
   </footer>
 
