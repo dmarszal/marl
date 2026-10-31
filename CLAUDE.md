@@ -72,3 +72,4 @@ nie globalnie). Nie dotykaj globalnej konfiguracji SSH/git użytkownika.
   i `openingHoursSpecification` w JSON-LD tej strony.
 - `.site-header > nav:not(.breadcrumbs)` – w nagłówku są dwa `<nav>` (menu i okruszki); nie upraszczaj selektora.
 - Commity: krótkie, po angielsku, w trybie rozkazującym (jak w historii repo).
+- 
